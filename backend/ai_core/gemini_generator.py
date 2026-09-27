@@ -14,7 +14,18 @@ class GeminiDocumentGenerator:
     def __init__(self):
         self.api_key = settings.gemini_api_key
         self.model_name = settings.gemini_model
+    def list_available_models(self):
+    from google import genai
 
+    client = genai.Client(api_key=self.api_key)
+
+    models = client.models.list()
+
+    return [
+        model.name
+        for model in models
+        if "generateContent" in getattr(model, "supported_actions", [])
+    ]
     def generate_document(
         self,
         document_type: str,
