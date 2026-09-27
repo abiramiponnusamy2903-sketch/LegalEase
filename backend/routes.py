@@ -17,8 +17,6 @@ def health_check():
     }
 
 
-@router.post("/generate", response_model=DocumentResponse)
-
 @router.get("/models")
 def list_models():
     try:
@@ -30,6 +28,12 @@ def list_models():
             status_code=500,
             detail=f"Model listing failed: {str(exc)}"
         )
+
+
+@router.post(
+    "/generate",
+    response_model=DocumentResponse
+)
 def generate_document(request: DocumentRequest):
     try:
         content, mode = generator.generate_document(
