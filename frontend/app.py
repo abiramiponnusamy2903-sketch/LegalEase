@@ -39,6 +39,7 @@ parties = st.text_area(
 
 
 terms = st.text_area(
+    
     "Terms and Conditions",
     placeholder="Example: Confidentiality; Payment terms; Agreement duration"
 )
