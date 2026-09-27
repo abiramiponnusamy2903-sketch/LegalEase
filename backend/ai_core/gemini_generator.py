@@ -1,5 +1,3 @@
-import os
-
 from backend.config import settings
 
 
@@ -14,18 +12,24 @@ class GeminiDocumentGenerator:
     def __init__(self):
         self.api_key = settings.gemini_api_key
         self.model_name = settings.gemini_model
+
     def list_available_models(self):
-    from google import genai
+        """
+        List Gemini models available to the configured API key.
+        """
 
-    client = genai.Client(api_key=self.api_key)
+        from google import genai
 
-    models = client.models.list()
+        client = genai.Client(api_key=self.api_key)
 
-    return [
-        model.name
-        for model in models
-        if "generateContent" in getattr(model, "supported_actions", [])
-    ]
+        models = client.models.list()
+
+        return [
+            model.name
+            for model in models
+            if "generateContent" in getattr(model, "supported_actions", [])
+        ]
+
     def generate_document(
         self,
         document_type: str,
@@ -93,7 +97,11 @@ class GeminiDocumentGenerator:
         effective_date: str
     ) -> str:
 
-        date_text = effective_date.strip() if effective_date else "Not specified"
+        date_text = (
+            effective_date.strip()
+            if effective_date
+            else "Not specified"
+        )
 
         return f"""
 You are a professional legal-document drafting assistant.
@@ -141,7 +149,11 @@ Return only the document draft.
         Creates a demo document when Gemini API access is not configured.
         """
 
-        date_text = effective_date.strip() if effective_date else "Not specified"
+        date_text = (
+            effective_date.strip()
+            if effective_date
+            else "Not specified"
+        )
 
         term_list = [
             term.strip()
