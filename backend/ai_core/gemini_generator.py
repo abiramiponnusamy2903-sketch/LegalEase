@@ -25,6 +25,7 @@ class GeminiDocumentGenerator:
         models = client.models.list()
 
         return [
+            
             model.name
             for model in models
             if "generateContent" in getattr(model, "supported_actions", [])
