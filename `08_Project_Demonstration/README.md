@@ -4,7 +4,7 @@
 
 **LegalEase – AI-Powered Legal Document Generator**
 
-## Demonstration Overview
+## Demonstration Overview 
 
 The project demonstration presents the complete working process of the LegalEase application, from entering user information to generating, editing, and downloading an AI-assisted legal document.
 
